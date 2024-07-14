@@ -333,13 +333,65 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11423590, guid: c0c356ca5fe9b1443b4b8759ed02eb2f, type: 3}
+      propertyPath: Camera
+      value: 
+      objectReference: {fileID: 591820184}
+    - target: {fileID: 11423590, guid: c0c356ca5fe9b1443b4b8759ed02eb2f, type: 3}
       propertyPath: Source
       value: 
       objectReference: {fileID: 727482625}
     - target: {fileID: 11423590, guid: c0c356ca5fe9b1443b4b8759ed02eb2f, type: 3}
+      propertyPath: Intensity
+      value: 5.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423590, guid: c0c356ca5fe9b1443b4b8759ed02eb2f, type: 3}
+      propertyPath: Forkedness
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423590, guid: c0c356ca5fe9b1443b4b8759ed02eb2f, type: 3}
+      propertyPath: ChaosFactor
+      value: 0.316
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423590, guid: c0c356ca5fe9b1443b4b8759ed02eb2f, type: 3}
       propertyPath: Destination
       value: 
       objectReference: {fileID: 513310010}
+    - target: {fileID: 11423590, guid: c0c356ca5fe9b1443b4b8759ed02eb2f, type: 3}
+      propertyPath: FadePercent
+      value: 0.365
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423590, guid: c0c356ca5fe9b1443b4b8759ed02eb2f, type: 3}
+      propertyPath: GlowIntensity
+      value: 1.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423590, guid: c0c356ca5fe9b1443b4b8759ed02eb2f, type: 3}
+      propertyPath: GlowTintColor.g
+      value: 0.1901753
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423590, guid: c0c356ca5fe9b1443b4b8759ed02eb2f, type: 3}
+      propertyPath: ChaosFactorForks
+      value: 0.899
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423590, guid: c0c356ca5fe9b1443b4b8759ed02eb2f, type: 3}
+      propertyPath: EndWidthMultiplier
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423590, guid: c0c356ca5fe9b1443b4b8759ed02eb2f, type: 3}
+      propertyPath: ForkLengthVariance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423590, guid: c0c356ca5fe9b1443b4b8759ed02eb2f, type: 3}
+      propertyPath: GlowWidthMultiplier
+      value: 15.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423590, guid: c0c356ca5fe9b1443b4b8759ed02eb2f, type: 3}
+      propertyPath: ForkLengthMultiplier
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11423590, guid: c0c356ca5fe9b1443b4b8759ed02eb2f, type: 3}
+      propertyPath: ForkEndWidthMultiplier
+      value: 0.82
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0c356ca5fe9b1443b4b8759ed02eb2f, type: 3}
 --- !u!1001 &2116698974
