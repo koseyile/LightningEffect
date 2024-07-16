@@ -14,7 +14,7 @@ public class LightningManager : MonoBehaviour
     void Start()
     {
         LightningIntensityChange();
-        StartCoroutine(LightningAnimation());
+        //StartCoroutine(LightningAnimation());
     }
 
     // Update is called once per frame
@@ -37,8 +37,8 @@ public class LightningManager : MonoBehaviour
 
         for (int i = 0; i < RandomLightings.Length; i++)
         {
-            RandomLightings[i].IntervalRange.Minimum = Mathf.Lerp(1f, 0.3f, IntensitySlider.value);
-            RandomLightings[i].IntervalRange.Maximum = Mathf.Lerp(1f, 0.3f, IntensitySlider.value);
+            RandomLightings[i].IntervalRange.Minimum = Mathf.Lerp(0.3f, 0.1f, IntensitySlider.value);
+            RandomLightings[i].IntervalRange.Maximum = Mathf.Lerp(0.3f, 0.1f, IntensitySlider.value);
         }
     }
 
@@ -53,7 +53,7 @@ public class LightningManager : MonoBehaviour
             {
                 index = 0;
             }
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(0.5f);
         }
 
         yield return null;
