@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Movement: {x: 0, y: 5000, z: 0}
-  MoveSpeed: 0.1
+  MoveSpeed: 0.9
 --- !u!23 &3094238
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -987,7 +987,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Movement: {x: 0, y: 5000, z: 0}
-  MoveSpeed: 0.1
+  MoveSpeed: 0.9
 --- !u!23 &827096834
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1372,7 +1372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Movement: {x: 0, y: 5000, z: 0}
-  MoveSpeed: 0.1
+  MoveSpeed: 0.9
 --- !u!23 &1066353510
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1597,7 +1597,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Movement: {x: 0, y: 5000, z: 0}
-  MoveSpeed: 0.1
+  MoveSpeed: 0.9
 --- !u!23 &1263451705
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2201,7 +2201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Movement: {x: 0, y: 5000, z: 0}
-  MoveSpeed: 0.1
+  MoveSpeed: 0.9
 --- !u!23 &1568758391
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2926,7 +2926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Movement: {x: 0, y: 5000, z: 0}
-  MoveSpeed: 0.1
+  MoveSpeed: 0.9
 --- !u!23 &2065863556
 MeshRenderer:
   m_ObjectHideFlags: 0
