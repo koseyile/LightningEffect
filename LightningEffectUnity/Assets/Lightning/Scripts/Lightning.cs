@@ -25,7 +25,7 @@ public class Lightning : MonoBehaviour
         for (int i = 0; i < LightningBolts.Length; i++)
         {
             LightningBolts[i].CountRange.Maximum = (int)Mathf.Lerp(1, 8, IntensitySlider.value);
-            LightningBolts[i].ChaosFactor = Mathf.Lerp(0.1f, 0.25f, IntensitySlider.value);
+            LightningBolts[i].ChaosFactor = Mathf.Lerp(0.1f, 0.2f, IntensitySlider.value);
 
             //LightningBolts[i].IntervalRange.Minimum = Mathf.Lerp(1f, 0.05f, IntensitySlider.value);
             //LightningBolts[i].IntervalRange.Maximum = Mathf.Lerp(1f, 0.05f, IntensitySlider.value);
