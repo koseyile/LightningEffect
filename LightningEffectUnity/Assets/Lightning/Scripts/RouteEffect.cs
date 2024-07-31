@@ -84,7 +84,7 @@ public class RouteEffect : MonoBehaviour
     }
 
     //private IEnumerator GetRoutePath(Color color, Color[] pixels, int width, int height, RectTransform weldPoint)
-    private List<RoutePoint> GetRoutePath(Color color, Color[] pixels, int width, int height, bool isTop)
+    private List<RoutePoint> GetRoutePath(Color color, Color[] pixels, int width, int height, bool isLeft)
     {
         List<RoutePoint> routePath = new List<RoutePoint>();
         //Debug.Log("GetRoutePath: w:" + width + " h:" + height);
@@ -102,7 +102,7 @@ public class RouteEffect : MonoBehaviour
                      c.a > 0.5f
                     )
                 {
-                    if ( (isTop && y>=height/2) || (!isTop && y<height/2) )
+                    if ( (isLeft && x<=width/2) || (!isLeft && x>width/2) )
                     {
                         RoutePoint newRoutePoint = new RoutePoint();
                         newRoutePoint.position = new Vector2(x * mScale, y * mScale);
