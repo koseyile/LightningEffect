@@ -63,12 +63,15 @@ public class RouteEffect : MonoBehaviour
     private IEnumerator CreateRoutePath(bool isTop, RectTransform weldPoint)
     {
         List<RoutePoint> routePathTop1 = GetRoutePath(Color.red, mRoutePixels, mRouteTexture.width, mRouteTexture.height, isTop);
+        routePathTop1 = NearestNeighborSort(routePathTop1);
         yield return ShowRoutePath(routePathTop1, weldPoint);
 
         List<RoutePoint> routePathTop2 = GetRoutePath(Color.green, mRoutePixels, mRouteTexture.width, mRouteTexture.height, isTop);
+        routePathTop2 = NearestNeighborSort(routePathTop2);
         yield return ShowRoutePath(routePathTop2, weldPoint);
 
         List<RoutePoint> routePathTop3 = GetRoutePath(Color.blue, mRoutePixels, mRouteTexture.width, mRouteTexture.height, isTop);
+        routePathTop3 = NearestNeighborSort(routePathTop3);
         yield return ShowRoutePath(routePathTop3, weldPoint);
     }
 
@@ -81,6 +84,45 @@ public class RouteEffect : MonoBehaviour
             go.transform.position = weldPoint.position;
             yield return new WaitForSeconds(0.05f);
         }
+    }
+
+    // 计算两个点之间的欧几里得距离
+    private float Distance(Vector2 p1, Vector2 p2)
+    {
+        return Vector2.Distance(p1, p2);
+    }
+
+    // 最近邻排序算法
+    public List<RoutePoint> NearestNeighborSort(List<RoutePoint> points)
+    {
+        if (points.Count == 0) return points;
+
+        List<RoutePoint> sortedPoints = new List<RoutePoint>();
+        RoutePoint currentPoint = points[0];
+        sortedPoints.Add(currentPoint);
+        points.Remove(currentPoint);
+
+        while (points.Count > 0)
+        {
+            RoutePoint nextPoint = points[0];
+            float minDistance = Distance(currentPoint.position, nextPoint.position);
+
+            foreach (var point in points)
+            {
+                float dist = Distance(currentPoint.position, point.position);
+                if (dist < minDistance)
+                {
+                    nextPoint = point;
+                    minDistance = dist;
+                }
+            }
+
+            sortedPoints.Add(nextPoint);
+            points.Remove(nextPoint);
+            currentPoint = nextPoint;
+        }
+
+        return sortedPoints;
     }
 
     //private IEnumerator GetRoutePath(Color color, Color[] pixels, int width, int height, RectTransform weldPoint)
@@ -116,36 +158,4 @@ public class RouteEffect : MonoBehaviour
         //yield return null;
     }
 
-    //private void addRoutePoint(RoutePoint start, RoutePoint newRoutePoint)
-    //{
-    //    //get the nearest point
-    //    RoutePoint currentRoutePoint = start;
-    //    RoutePoint nearestRoutePoint = null;
-    //    float nearestDistance = float.MaxValue;
-    //    while (currentRoutePoint!=null)
-    //    {
-    //        float d = Vector2.Distance(currentRoutePoint.position, newRoutePoint.position);
-    //        //float d = Vector2.Distance(start.position, newRoutePoint.position);
-    //        if ( d<nearestDistance && newRoutePoint.position.y>=start.position.y )
-    //        {
-    //            nearestRoutePoint = currentRoutePoint;
-    //            nearestDistance = d;
-    //        }
-
-    //        currentRoutePoint = currentRoutePoint.next;
-    //    }
-
-    //    if (nearestRoutePoint!=null)
-    //    {
-    //        RoutePoint next = nearestRoutePoint.next;
-    //        nearestRoutePoint.next = newRoutePoint;
-    //        newRoutePoint.next = next;
-    //        newRoutePoint.pre = nearestRoutePoint;
-    //        if (next != null)
-    //        {
-    //            next.pre = newRoutePoint;
-    //        }
-    //    }
-
-    //}
 }

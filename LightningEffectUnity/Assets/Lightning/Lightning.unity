@@ -1350,7 +1350,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: eb187ddc88d02ee4cba10172d3c73af8, type: 3}
   - {fileID: 21300000, guid: 4fc581560461e7341823fdab37ec9775, type: 3}
   - {fileID: 21300000, guid: 634eeead4b16dcf48a29b83ae833dc2a, type: 3}
-  RouteIndex: 1
+  RouteIndex: 2
   WeldPoints:
   - {fileID: 89814359}
   - {fileID: 1080009463}
