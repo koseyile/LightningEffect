@@ -17,6 +17,7 @@ public class RouteEffect : MonoBehaviour
     public RectTransform[] WeldPoints;
     public GameObject RouteCube;
     public float ShowRoutePathWaitTime = 0.01f;
+    public int ShowPixelCountPerFrame = 5;
     private Texture2D mRouteTexture;
     private Color[] mRoutePixels;
     private float mScale = 1f;
@@ -35,6 +36,8 @@ public class RouteEffect : MonoBehaviour
 
     private void Init()
     {
+        Debug.Log("Init");
+
         RouteImage.sprite = RouteOriginalSprites[RouteIndex];
         RouteImage.SetNativeSize();
 
@@ -61,22 +64,30 @@ public class RouteEffect : MonoBehaviour
         //List<RoutePoint> routePathBottom = GetRoutePath(Color.red, mRoutePixels, mRouteTexture.width, mRouteTexture.height, false);
         //StartCoroutine(ShowRoutePath(routePathBottom, WeldPoints[1]));
 
-        StartCoroutine(CreateRoutePath(true, WeldPoints[0], 0, 10));
-        StartCoroutine(CreateRoutePath(false, WeldPoints[1], 1, 10));
+        
+        StartCoroutine(CreateRoutePath(true, WeldPoints[0], 0, ShowPixelCountPerFrame));
+        StartCoroutine(CreateRoutePath(false, WeldPoints[1], 1, ShowPixelCountPerFrame));
     }
 
     private IEnumerator CreateRoutePath(bool isTop, RectTransform weldPoint, int weldIndex, int showCountPerFrame)
     {
+        Debug.Log("CreateRoutePath:" + weldIndex + " begin");
         weldPoint.gameObject.SetActive(true);
+        Debug.Log("CreateRoutePath:" + weldIndex + " a1 "+Time.timeSinceLevelLoad);
         List<RoutePoint> routePathTop1 = GetRoutePath(Color.red, mRoutePixels, mRouteTexture.width, mRouteTexture.height, isTop);
+        Debug.Log("CreateRoutePath:" + weldIndex + " a2 "+Time.timeSinceLevelLoad);
         routePathTop1 = NearestNeighborSort(routePathTop1);
         yield return ShowRoutePath(routePathTop1, weldPoint, showCountPerFrame);
 
+        Debug.Log("CreateRoutePath:" + weldIndex + " b1 " + Time.timeSinceLevelLoad);
         List<RoutePoint> routePathTop2 = GetRoutePath(Color.green, mRoutePixels, mRouteTexture.width, mRouteTexture.height, isTop);
+        Debug.Log("CreateRoutePath:" + weldIndex + " b2 " + Time.timeSinceLevelLoad);
         routePathTop2 = NearestNeighborSort(routePathTop2);
         yield return ShowRoutePath(routePathTop2, weldPoint, showCountPerFrame);
 
+        Debug.Log("CreateRoutePath:" + weldIndex + " c1 " + Time.timeSinceLevelLoad);
         List<RoutePoint> routePathTop3 = GetRoutePath(Color.blue, mRoutePixels, mRouteTexture.width, mRouteTexture.height, isTop);
+        Debug.Log("CreateRoutePath:" + weldIndex + " c2 " + Time.timeSinceLevelLoad);
         routePathTop3 = NearestNeighborSort(routePathTop3);
         yield return ShowRoutePath(routePathTop3, weldPoint, showCountPerFrame);
 
@@ -92,6 +103,8 @@ public class RouteEffect : MonoBehaviour
             }
         }
 
+        weldPoint.gameObject.SetActive(false);
+
         if ( isFinished )
         {
             RouteImage.enabled = isFinished;
@@ -106,7 +119,10 @@ public class RouteEffect : MonoBehaviour
             }
         }
 
-        
+
+
+        Debug.Log("CreateRoutePath:" + weldIndex + " end");
+
     }
 
     private IEnumerator ShowRoutePath(List<RoutePoint> routePath, RectTransform weldPoint, int showCountPerFrame)

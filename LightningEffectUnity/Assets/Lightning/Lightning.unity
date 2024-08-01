@@ -1355,12 +1355,13 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 674820ff143e0ed42bf15e3d0c1ae8f5, type: 3}
   - {fileID: 21300000, guid: c6027c079c7f4204485b9eedf9fad5f6, type: 3}
   - {fileID: 21300000, guid: eb4013cb4bb29aa45a9ecbc6d5ad6a32, type: 3}
-  RouteIndex: 1
+  RouteIndex: 3
   WeldPoints:
   - {fileID: 89814359}
   - {fileID: 1080009463}
   RouteCube: {fileID: 8287465017492029988, guid: 2c556e4e469bb454b983f86b318ab75f, type: 3}
-  ShowRoutePathWaitTime: 0.001
+  ShowRoutePathWaitTime: 0.05
+  ShowPixelCountPerFrame: 5
 --- !u!1 &1045478741
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ public class Test : MonoBehaviour
         CycleTransforms[1].localScale = Vector3.one * 2f;
         mLastMousePos = Input.mousePosition;
         mMoveIndex = 1;
-        //Cursor.visible = false;
+        Cursor.visible = false;
 
         mCycleColors = new int[CycleTransforms.Length];
         for (int i = 0; i < mCycleColors.Length; i++)
@@ -33,19 +33,36 @@ public class Test : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 mousePos = Input.mousePosition;
-        float yMove = mousePos.y - mLastMousePos.y;
-        float speed = yMove / Time.deltaTime;
-        
-        mLastMousePos = mousePos;
-        if (Mathf.Abs(speed)>1f && mIsBusy==false)
+        if (Input.GetAxis("Mouse Y") != 0)
         {
+            float yMove = Input.GetAxis("Mouse Y");
+            float speed = yMove;
             //Debug.Log(speed);
-            int s = (int)Mathf.Sign(speed);
-            Move(s);
-            mIsBusy = true;
-            this.Invoke("MouseMoveEnd", 0.2f);
+
+            if (Mathf.Abs(speed) > 0.05f && mIsBusy == false)
+            {
+                //Debug.Log(speed);
+                int s = (int)Mathf.Sign(speed);
+                Move(-s);
+                mIsBusy = true;
+                this.Invoke("MouseMoveEnd", 0.2f);
+            }
         }
+        
+
+        //Vector3 mousePos = Input.mousePosition;
+        //float yMove = mousePos.y - mLastMousePos.y;
+        //float speed = yMove / Time.deltaTime;
+        
+        //mLastMousePos = mousePos;
+        //if (Mathf.Abs(speed)>1f && mIsBusy==false)
+        //{
+        //    //Debug.Log(speed);
+        //    int s = (int)Mathf.Sign(speed);
+        //    Move(-s);
+        //    mIsBusy = true;
+        //    this.Invoke("MouseMoveEnd", 0.2f);
+        //}
 
         //if ( Mathf.Abs(yMove)>400f )
         //{
