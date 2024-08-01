@@ -18,6 +18,7 @@ public class RouteEffect : MonoBehaviour
     public GameObject RouteCube;
     public float ShowRoutePathWaitTime = 0.01f;
     public int ShowPixelCountPerFrame = 5;
+    public bool IsFullPath;
     private Texture2D mRouteTexture;
     private Color[] mRoutePixels;
     private float mScale = 1f;
@@ -64,29 +65,36 @@ public class RouteEffect : MonoBehaviour
         //List<RoutePoint> routePathBottom = GetRoutePath(Color.red, mRoutePixels, mRouteTexture.width, mRouteTexture.height, false);
         //StartCoroutine(ShowRoutePath(routePathBottom, WeldPoints[1]));
 
+        if (IsFullPath)
+        {
+            StartCoroutine(CreateRoutePath(true, true, WeldPoints[0], 0, ShowPixelCountPerFrame));
+        }
+        else
+        {
+            StartCoroutine(CreateRoutePath(false, true, WeldPoints[0], 0, ShowPixelCountPerFrame));
+            StartCoroutine(CreateRoutePath(false, false, WeldPoints[1], 1, ShowPixelCountPerFrame));
+        }
         
-        StartCoroutine(CreateRoutePath(true, WeldPoints[0], 0, ShowPixelCountPerFrame));
-        StartCoroutine(CreateRoutePath(false, WeldPoints[1], 1, ShowPixelCountPerFrame));
     }
 
-    private IEnumerator CreateRoutePath(bool isTop, RectTransform weldPoint, int weldIndex, int showCountPerFrame)
+    private IEnumerator CreateRoutePath(bool isFullPath, bool isLeft, RectTransform weldPoint, int weldIndex, int showCountPerFrame)
     {
         Debug.Log("CreateRoutePath:" + weldIndex + " begin");
         weldPoint.gameObject.SetActive(true);
         Debug.Log("CreateRoutePath:" + weldIndex + " a1 "+Time.timeSinceLevelLoad);
-        List<RoutePoint> routePathTop1 = GetRoutePath(Color.red, mRoutePixels, mRouteTexture.width, mRouteTexture.height, isTop);
+        List<RoutePoint> routePathTop1 = GetRoutePath(Color.red, mRoutePixels, mRouteTexture.width, mRouteTexture.height, isFullPath, isLeft);
         Debug.Log("CreateRoutePath:" + weldIndex + " a2 "+Time.timeSinceLevelLoad);
         routePathTop1 = NearestNeighborSort(routePathTop1);
         yield return ShowRoutePath(routePathTop1, weldPoint, showCountPerFrame);
 
         Debug.Log("CreateRoutePath:" + weldIndex + " b1 " + Time.timeSinceLevelLoad);
-        List<RoutePoint> routePathTop2 = GetRoutePath(Color.green, mRoutePixels, mRouteTexture.width, mRouteTexture.height, isTop);
+        List<RoutePoint> routePathTop2 = GetRoutePath(Color.green, mRoutePixels, mRouteTexture.width, mRouteTexture.height, isFullPath, isLeft);
         Debug.Log("CreateRoutePath:" + weldIndex + " b2 " + Time.timeSinceLevelLoad);
         routePathTop2 = NearestNeighborSort(routePathTop2);
         yield return ShowRoutePath(routePathTop2, weldPoint, showCountPerFrame);
 
         Debug.Log("CreateRoutePath:" + weldIndex + " c1 " + Time.timeSinceLevelLoad);
-        List<RoutePoint> routePathTop3 = GetRoutePath(Color.blue, mRoutePixels, mRouteTexture.width, mRouteTexture.height, isTop);
+        List<RoutePoint> routePathTop3 = GetRoutePath(Color.blue, mRoutePixels, mRouteTexture.width, mRouteTexture.height, isFullPath, isLeft);
         Debug.Log("CreateRoutePath:" + weldIndex + " c2 " + Time.timeSinceLevelLoad);
         routePathTop3 = NearestNeighborSort(routePathTop3);
         yield return ShowRoutePath(routePathTop3, weldPoint, showCountPerFrame);
@@ -186,7 +194,7 @@ public class RouteEffect : MonoBehaviour
     }
 
     //private IEnumerator GetRoutePath(Color color, Color[] pixels, int width, int height, RectTransform weldPoint)
-    private List<RoutePoint> GetRoutePath(Color color, Color[] pixels, int width, int height, bool isLeft)
+    private List<RoutePoint> GetRoutePath(Color color, Color[] pixels, int width, int height, bool isFullPath, bool isLeft)
     {
         List<RoutePoint> routePath = new List<RoutePoint>();
         //Debug.Log("GetRoutePath: w:" + width + " h:" + height);
@@ -204,7 +212,7 @@ public class RouteEffect : MonoBehaviour
                      c.a > 0.5f
                     )
                 {
-                    if ( (isLeft && x<=width/2) || (!isLeft && x>width/2) )
+                    if ( isFullPath || ((isLeft && x<=width/2) || (!isLeft && x>width/2)) )
                     {
                         RoutePoint newRoutePoint = new RoutePoint();
                         newRoutePoint.position = new Vector2(x * mScale, y * mScale);
