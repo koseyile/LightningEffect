@@ -10,13 +10,14 @@ public class Test : MonoBehaviour
     private int mMoveIndex = 0;
     private int[] mCycleColors;
     private float mHoldPageTime = 0f;
+    private bool mIsBusy = false;
     // Start is called before the first frame update
     void Start()
     {
         CycleTransforms[1].localScale = Vector3.one * 2f;
         mLastMousePos = Input.mousePosition;
         mMoveIndex = 1;
-        Cursor.visible = false;
+        //Cursor.visible = false;
 
         mCycleColors = new int[CycleTransforms.Length];
         for (int i = 0; i < mCycleColors.Length; i++)
@@ -25,23 +26,39 @@ public class Test : MonoBehaviour
         }
     }
 
+    private void MouseMoveEnd()
+    {
+        mIsBusy = false;
+    }
     // Update is called once per frame
     void Update()
     {
         Vector3 mousePos = Input.mousePosition;
         float yMove = mousePos.y - mLastMousePos.y;
-        if ( Mathf.Abs(yMove)>400f )
+        float speed = yMove / Time.deltaTime;
+        
+        mLastMousePos = mousePos;
+        if (Mathf.Abs(speed)>1f && mIsBusy==false)
         {
-            mLastMousePos = mousePos;
-            //Debug.Log("yMove:" + yMove);
-            int s = (int)Mathf.Sign(yMove);
-            Move(-s);
-            //Debug.Log(s);
+            //Debug.Log(speed);
+            int s = (int)Mathf.Sign(speed);
+            Move(s);
+            mIsBusy = true;
+            this.Invoke("MouseMoveEnd", 0.2f);
         }
+
+        //if ( Mathf.Abs(yMove)>400f )
+        //{
+        //    mLastMousePos = mousePos;
+        //    //Debug.Log("yMove:" + yMove);
+        //    int s = (int)Mathf.Sign(yMove);
+        //    Move(-s);
+        //    //Debug.Log(s);
+        //}
 
         float holdTime = 0f;
 
-        if ( Input.GetKey(KeyCode.PageDown) || Input.GetKey(KeyCode.PageUp) )
+        if ( Input.GetKeyDown(KeyCode.PageDown) || Input.GetKeyDown(KeyCode.PageUp) || Input.GetMouseButtonDown(0) )
         {
             
 
@@ -50,7 +67,7 @@ public class Test : MonoBehaviour
                 mHoldPageTime += Time.deltaTime;
                 //if (mHoldPageTime >= holdTime)
                 {
-                    Debug.Log("test");
+                    //Debug.Log("test");
                     ChangeColor();
                 }
             }
